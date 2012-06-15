@@ -1,11 +1,12 @@
 package com.entity.store;
 
-public class FactDbRecordImpl implements FactDbRecord{
+public class FactDbRecordImpl implements FactDbRecord {
 
 	long entityId;
 	long time;
 	String name;
 	String value;
+
 	@Override
 	public long getMillis() {
 		return time;
@@ -25,18 +26,18 @@ public class FactDbRecordImpl implements FactDbRecord{
 	public String fieldValue() {
 		return value;
 	}
-	
-	public void setRecord(long entityId, String name, String value){
+
+	public void setRecord(long entityId, String name, String value) {
 		this.entityId = entityId;
 		this.name = name;
 		this.value = value;
 		this.time = System.currentTimeMillis();
-		
+
 	}
-	
+
 	@Override
 	public String toString() {
-		return entityId + ":" + name + ":" + value ;
+		return entityId + ":" + name + ":" + value;
 	}
 
 }
