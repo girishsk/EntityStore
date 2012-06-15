@@ -23,6 +23,9 @@ public class EntityStoreTest extends TestCase {
 		api = null;
 	}
 
+	/**
+	 * Testing the previous functionality and state
+	 */
 	public void testPrevious() {
 		api.insertRecord(1, "name", "firstname");
 		api.insertRecord(1, "age", "10");
@@ -35,7 +38,9 @@ public class EntityStoreTest extends TestCase {
 		Assert.assertEquals("name", retrivedRecord.fieldName());
 		Assert.assertEquals("lastname", retrivedRecord.fieldValue());
 	}
-
+	/**
+	 * Testing the next functionality and state
+	 */
 	public void testNext() {
 		api.insertRecord(1, "name", "firstname");
 		api.insertRecord(1, "age", "10");
@@ -49,7 +54,9 @@ public class EntityStoreTest extends TestCase {
 		Assert.assertEquals("age", retrivedRecord.fieldName());
 		Assert.assertEquals("10", retrivedRecord.fieldValue());
 	}
-
+	/**
+	 * Testing the 'gotoAfterLatest' functionality and state
+	 */
 	public void testNextOnLastNode() {
 
 		api.insertRecord(1, "name", "firstname");
@@ -58,7 +65,9 @@ public class EntityStoreTest extends TestCase {
 
 		Assert.assertNull(api.next());
 	}
-
+	/**
+	 * Testing the 'gotoBeforeEarliest' functionality and state
+	 */
 	public void testPreviousOnFirstNode() {
 
 		api.insertRecord(1, "name", "firstname");
@@ -67,7 +76,9 @@ public class EntityStoreTest extends TestCase {
 
 		Assert.assertNull(api.previous());
 	}
-
+	/**
+	 * Testing the state of the head Node
+	 */
 	public void testStateOfTheHead() {
 
 		api.insertRecord(1, "name", "firstname");
@@ -83,19 +94,28 @@ public class EntityStoreTest extends TestCase {
 
 		Assert.assertEquals("address", api.previous().fieldName());
 	}
-
+	/**
+	 * Testing the unknown key
+	 */
 	public void testNoData() {
 		List<FactDbRecordImpl> retrivedRecords = api.retriveRecord(1,
 				"unknownKey");
 		Assert.assertEquals(0, retrivedRecords.size());
 	}
-
+	
+	
+	/**
+	 * Trying to retrieve unknown/ non-existing entity. 
+	 */
 	public void testWithOneDataAndNonExistingEntity() {
 		api.insertRecord(1, "name", "firstname");
 		List<FactDbRecordImpl> retrivedRecords = api.retriveRecord(2, "name");
 		Assert.assertEquals(0, retrivedRecords.size());
 	}
 
+	/**
+	 * Testing for one record and existing entity
+	 */
 	public void testWithOneDataAndExistingEntity() {
 		api.insertRecord(1, "name", "firstname");
 		List<FactDbRecordImpl> retrivedRecords = api.retriveRecord(1, "name");
@@ -106,12 +126,18 @@ public class EntityStoreTest extends TestCase {
 		Assert.assertEquals(1, data.getEntityId());
 	}
 
+	/**
+	 * Testing for one record and a non existing key
+	 */
 	public void testWithOneDataAndNonExistingKey() {
 		api.insertRecord(1, "name", "firstname");
 		List<FactDbRecordImpl> retrivedRecords = api.retriveRecord(1, "age");
 		Assert.assertEquals(0, retrivedRecords.size());
 	}
 
+	/**
+	 * Getting the latest record for an entity and key
+	 */
 	public void testGetLatestRecordForAnEntityAndKey() {
 		api.insertRecord(1, "name", "firstname");
 		api.insertRecord(1, "age", "10");
@@ -129,6 +155,9 @@ public class EntityStoreTest extends TestCase {
 		Assert.assertEquals("20", data.fieldValue());
 	}
 
+	/**
+	 * Getting data with multiple keys. 
+	 */
 	public void testGetDataWithMultipleKeys() {
 
 		api.insertRecord(1, "name", "firstname");
@@ -146,6 +175,9 @@ public class EntityStoreTest extends TestCase {
 		Assert.assertEquals(4, retrivedRecords.size());
 	}
 
+	/**
+	 * Getting data with no keys 
+	 */
 	public void testGetDataWithNoKeys() {
 		api.insertRecord(1, "name", "firstname");
 		api.insertRecord(1, "age", "10");
@@ -154,6 +186,10 @@ public class EntityStoreTest extends TestCase {
 		Assert.assertEquals(0, retrivedRecords.size());
 	}
 
+	/**
+	 * Testing the time stamp 
+	 * @throws Exception
+	 */
 	public void testTimeStamp() throws Exception {
 		long startTime = System.currentTimeMillis();
 		Thread.sleep(10);
